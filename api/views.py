@@ -1,11 +1,9 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
-# Create your views here.
+# Simple function-based view
 def students(request):
-    student = [
-        {
-        'naame':'satya',
-        'class': 'first class'
-    }
-    ]
-    return render(request , 'students.html' , {'student':student})
+    return HttpResponse("This is the students page")
+
+
+
