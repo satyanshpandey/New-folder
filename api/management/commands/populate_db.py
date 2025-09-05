@@ -49,7 +49,7 @@ class Command(BaseCommand):
         for i in range(NUM_TEACHERS):
             teacher = Teacher.objects.create(
                 name=fake.name(),
-                email=fake.unique.email(),
+                email=fake.email(),
                 course=random.choice(courses)  # ✅ This is required
             )
             # Assign random subjects
@@ -60,40 +60,40 @@ class Command(BaseCommand):
         # ===============================
         # Create Students
         # ===============================
-        students = []
-        for i in range(NUM_STUDENTS):
-            student = Student.objects.create(
-                name=fake.name(),
-                email=fake.unique.email(),
-                course=random.choice(courses)
-            )  
-            # Assign random subjects
-            student.subjects.set(random.sample(subjects, k=random.randint(1, 5)))
-            # Create Profile
-            Profile.objects.create(
-                student=student,
-                age=random.randint(18, 30),
-                address=fake.address()
-            )
-            students.append(student)
-        self.stdout.write(f"{NUM_STUDENTS} Students created.")
+        # students = []
+        # for i in range(NUM_STUDENTS):
+        #     student = Student.objects.create(
+        #         name=fake.name(),
+        #         email=fake.email(),
+        #         course=random.choice(courses)
+        #     )  
+        #     # Assign random subjects
+        #     student.subjects.set(random.sample(subjects, k=random.randint(1, 5)))
+        #     # Create Profile
+        #     Profile.objects.create(
+        #         student=student,
+        #         age=random.randint(18, 30),
+        #         address=fake.address()
+        #     )
+        #     students.append(student)
+        # self.stdout.write(f"{NUM_STUDENTS} Students created.")
 
         # ===============================
         # Horizontal Sharding Example
         # ===============================
         # Let's split students by random into North and South regions
-        for student in students[:NUM_STUDENTS//2]:
-            StudentRegionNorth.objects.using('north').create(
-                name=student.name,
-                email=student.email,
-                course_id=student.course.id
-            )
-        for student in students[NUM_STUDENTS//2:]:
-            StudentRegionSouth.objects.using('south').create(
-                name=student.name,
-                email=student.email,
-                course_id=student.course.id
-            )
-        self.stdout.write("Sharded students inserted into North and South DBs.")
+        # for student in students[:NUM_STUDENTS//2]:
+        #     StudentRegionNorth.objects.using('north').create(
+        #         name=student.name,
+        #         email=student.email,
+        #         course_id=student.course.id
+        #     )
+        # for student in students[NUM_STUDENTS//2:]:
+        #     StudentRegionSouth.objects.using('south').create(
+        #         name=student.name,
+        #         email=student.email,
+        #         course_id=student.course.id
+        #     )
+        # self.stdout.write("Sharded students inserted into North and South DBs.")
 
-        self.stdout.write(self.style.SUCCESS("Database population complete!"))
+        # self.stdout.write(self.style.SUCCESS("Database population complete!"))

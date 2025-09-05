@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Person(models.Model):
     name = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
+    email = models.EmailField()
     
     class Meta:
         abstract = True
@@ -20,6 +20,7 @@ class Teacher(Person):
     subjects = models.ManyToManyField(Subject)
     
     
+# Student
 # Student
 class Student(Person):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
