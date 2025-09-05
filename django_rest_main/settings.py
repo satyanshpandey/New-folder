@@ -75,12 +75,12 @@ WSGI_APPLICATION = 'django_rest_main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -123,3 +123,27 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# my router for database sharding
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'north': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db_north.sqlite3',
+    },
+    'south': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db_south.sqlite3',
+    },
+}
+# DATABASE_ROUTERS = ['api.routers.StudentRegionRouter']
+# # DATABASE_ROUTERS = ['yourproject.routers.StudentRegionRouter']
+# DATABASE_ROUTERS = ['yourproject.routers.StudentRegionRouter']
+# Replace `yourproject` with your actual project folder name
+DATABASE_ROUTERS = ['routers.StudentRegionRouter']
+# Replace `yourproject` with your actual project folder name
