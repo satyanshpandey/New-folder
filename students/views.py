@@ -3,5 +3,11 @@ from django.http import HttpResponse
 
 # Create your views here.
 def students(request):
-    return HttpResponse("this is my firdt resposne.")
+    student = [
+        {
+        'naame':'satya',
+        'class': 'first class'
+    }
+    ]
+    return HttpResponse(student)
 
