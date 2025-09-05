@@ -66,7 +66,7 @@ class Command(BaseCommand):
                 name=fake.name(),
                 email=fake.unique.email(),
                 course=random.choice(courses)
-            )
+            )  
             # Assign random subjects
             student.subjects.set(random.sample(subjects, k=random.randint(1, 5)))
             # Create Profile
